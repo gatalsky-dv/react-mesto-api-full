@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('./middlewares/cors');
 const errorHandl = require('./middlewares/errorHandl');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -15,7 +16,15 @@ app.use(bodyParser.urlencoded({
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
+app.use(cors);
+
 app.use(requestLogger); // подключаем логгер запросов
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use('/', require('./routes/index'));
 
