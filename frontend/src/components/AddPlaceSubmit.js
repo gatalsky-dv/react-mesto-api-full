@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react";
-import PopupWithForm from "./PopupWithForm";
+import {useEffect, useState} from 'react';
+import PopupWithForm from './PopupWithForm';
 
 export default function AddPlaceSubmit({ isOpen, onClose, onAddPlace }) {
-	const [name, setName] = useState("");
-	const [link, setLink] = useState("");
+	const [name, setName] = useState('');
+	const [link, setLink] = useState('');
 	
 	const handleCardNameChange = (e) => {
 		setName(e.target.value);
@@ -22,43 +22,43 @@ export default function AddPlaceSubmit({ isOpen, onClose, onAddPlace }) {
 	}
 
 	useEffect(() => {
-		setName("");
-		setLink("");
+		setName('');
+		setLink('');
 	}, [isOpen]);
 	
 	return (
 		<PopupWithForm
-			name="card"
-			title="Новое место"
+			name='card'
+			title='Новое место'
 			isOpen={isOpen}
 			onClose={onClose}
-			buttonText="Создать"
+			buttonText='Создать'
 			onSubmit={handleSubmit}
 		>
 			<input
-				type="text"
-				className="popup__input popup__input_value_title"
-				id="title-input"
-				name="name"
-				placeholder="Название"
+				type='text'
+				className='popup__input popup__input_value_title'
+				id='title-input'
+				name='name'
+				placeholder='Название'
 				required
-				minLength="2"
-				maxLength="30"
+				minLength='2'
+				maxLength='30'
 				value={name}
 				onChange={handleCardNameChange}
 			/>
-			<span className="title-input-error"></span>
+			<span className='title-input-error'></span>
 			<input
-				type="url"
-				className="popup__input popup__input_value_link"
-				id="link-input"
-				name="link"
-				placeholder="Ссылка на картинку"
+				type='url'
+				className='popup__input popup__input_value_link'
+				id='link-input'
+				name='link'
+				placeholder='Ссылка на картинку'
 				required
 				value={link}
 				onChange={handleCardLinkChange}
 			/>
-			<span className="link-input-error"></span>
+			<span className='link-input-error'></span>
 		</PopupWithForm>
 	)
 }

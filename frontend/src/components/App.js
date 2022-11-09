@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch, useHistory, Redirect } from "react-router-dom";
-import "../index.css";
-import Header from "./Header.js";
-import Main from "./Main.js";
-import Footer from "./Footer.js";
-import Login from "./Login";
-import Register from "./Register";
-import InfoTooltip from "./InfoTooltip";
-import ProtectedRoute from "./ProtectedRoute";
-import PopupWithForm from "./PopupWithForm.js";
-import ImagePopup from "./ImagePopup.js";
-import api from "../utils/Api.js";
-import * as auth from "../utils/auth";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlaceSubmit";
+import { useEffect, useState } from 'react';
+import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import '../index.css';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
+import Login from './Login';
+import Register from './Register';
+import InfoTooltip from './InfoTooltip';
+import ProtectedRoute from './ProtectedRoute';
+import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
+import api from '../utils/Api.js';
+import * as auth from '../utils/auth';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlaceSubmit';
 
 export default function App() {
 	
@@ -29,12 +29,12 @@ export default function App() {
 	const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
 	const [loggedIn, setLoggedIn] = useState(false);
 	const history = useHistory();
-	const [email, setEmail] = useState("");
-	const [image, setImage] = useState("");
-	const [text, setText] = useState("");
+	const [email, setEmail] = useState('');
+	const [image, setImage] = useState('');
+	const [text, setText] = useState('');
 
 	useEffect(() => {
-		let token = localStorage.getItem("token");
+		let token = localStorage.getItem('token');
 		if (token) {
 			authentication(token);
 		}
@@ -42,7 +42,7 @@ export default function App() {
 
 	useEffect(() => {
 		if (loggedIn) {
-			history.push("/");
+			history.push('/');
 		}
 	}, [history, loggedIn]);
 
@@ -52,14 +52,14 @@ export default function App() {
 			.then((data) => {
 				if (data.token) {
 					setLoggedIn(true);
-					history.push("/");
+					history.push('/');
 					setEmail(email);
-					localStorage.setItem("token", data.token);
+					localStorage.setItem('token', data.token);
 				}
 			})
 			.catch(() => {
 				registerFail();
-				setText("Неправильный email или пароль");
+				setText('Неправильный email или пароль');
 			})
 	};
 
@@ -68,13 +68,13 @@ export default function App() {
 			.then((res) => {
 					if (res) {
 						registerSuccess();
-						history.push("/sign-in");
-						setText("Вы успешно зарегистрировались!");
+						history.push('/sign-in');
+						setText('Вы успешно зарегистрировались!');
 					}
 			})
 			.catch(() => {
 				registerFail();
-				setText("Что-то пошло не так! Попробуйте ещё раз.");
+				setText('Что-то пошло не так! Попробуйте ещё раз.');
 			})
 	};
 
@@ -83,7 +83,7 @@ export default function App() {
 		.then((res) => {
 			if (res) {
 				setLoggedIn(true);
-				setEmail(res.data.email);
+				setEmail(res.email);
 			}
 		})
 		.catch((err) => {
@@ -95,14 +95,14 @@ export default function App() {
 	
 	useEffect(() => {
 		function closeByEscape(e) {
-			if(e.key === "Escape") {
+			if(e.key === 'Escape') {
 				closeAllPopups();
 			}
 		}
 		if(isOpen) {
-			document.addEventListener("keydown", closeByEscape);
+			document.addEventListener('keydown', closeByEscape);
 			return () => {
-				document.removeEventListener("keydown", closeByEscape);
+				document.removeEventListener('keydown', closeByEscape);
 			}
 		}
 	}, [isOpen]);
@@ -201,12 +201,12 @@ export default function App() {
 	}
 
 	function registerSuccess() {
-		setImage("success");
+		setImage('success');
 		setIsInfoTooltipPopupOpen(true);
 	}
 
 	function registerFail() {
-		setImage("fail");
+		setImage('fail');
 		setIsInfoTooltipPopupOpen(true);
 	}
 
@@ -219,14 +219,14 @@ export default function App() {
 	}
 	
 	function onSignOut() {
-		localStorage.removeItem("token");
-		setEmail("");
-		history.push("/sign-in");
+		localStorage.removeItem('token');
+		setEmail('');
+		history.push('/sign-in');
 	}
 
 	return (
 			<CurrentUserContext.Provider value={currentUser}>
-				<div className="page">
+				<div className='page'>
 				<Header
 								email={email}
 								onLoginClick={onSignOut}
@@ -234,7 +234,7 @@ export default function App() {
 					<Switch>
 						<ProtectedRoute
 							exact
-							path="/"
+							path='/'
 							component={ Main }
 							loggedIn={loggedIn}
 							onEditProfile={handleEditProfileClick}
@@ -245,21 +245,21 @@ export default function App() {
 							onCardLike={handleCardLike}
 							onCardDelete={handleCardDelete}
 						/>
-						<Route path="/sign-in">
+						<Route path='/sign-in'>
 							<Login
 								onLogin={onLogin}
 							/>
 						</Route>
-						<Route path="/sign-up">
+						<Route path='/sign-up'>
 							<Register
 								onRegister={onRegister}
 							/>
 						</Route>
-						<Route path="*">
+						<Route path='*'>
 							{loggedIn ? (
-								<Redirect to="/" />
+								<Redirect to='/' />
 							) : (
-								<Redirect to="/sign-in" />
+								<Redirect to='/sign-in' />
 							)}
 						</Route>
 					</Switch>
@@ -271,7 +271,7 @@ export default function App() {
 						image={image}
 						isOpen={isInfoTooltipPopupOpen}
 						onClose={closeAllPopups}
-						name="info"
+						name='info'
 					/>
 					
 					<Footer/>
@@ -294,11 +294,11 @@ export default function App() {
 					/>
 	
 					<PopupWithForm
-						name="confirmation"
-						title="Вы уверены?"
+						name='confirmation'
+						title='Вы уверены?'
 					/>
 					<ImagePopup
-						name="image"
+						name='image'
 						card={selectedCard}
 						isOpen={!!selectedCard}
 						onClose={closeAllPopups}
