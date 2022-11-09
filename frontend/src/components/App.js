@@ -131,14 +131,11 @@ export default function App() {
 		}
 	}, [loggedIn]);
 	
-	function handleCardLike(card) {
-		// снова проверяем, есть ли уже лайк на этой карточке
-		const isLiked = card.likes.some( i => i._id === currentUser._id );
-		
+	function handleCardLike(_id, isLiked) {
 		// отправляем запрос в API и получаем обновленные данные карточки
-		api.showLikesCard(card._id, isLiked)
+		api.showLikesCard(_id, isLiked)
 			.then((newCard) => { //форматируем новый массив на основе имеющегося, подставляя в него новую карточку
-				const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+				const newCards = cards.map((c) => c._id === newCard._id ? newCard : c);
 				//обновляем стейт
 				setCards(newCards);
 			})
@@ -148,7 +145,7 @@ export default function App() {
 	}
 	
 	function handleCardDelete(cardId) {
-		api.deleteCard(cardId._id)
+		api.deleteCard(cardId)
 			.then((res) => {
 				setCards(cards.filter(card => card._id !== cardId._id))
 			})

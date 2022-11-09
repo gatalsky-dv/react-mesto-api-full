@@ -15,17 +15,18 @@ class Api {
     return fetch(`${this._url}/cards`, {
       
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
     })
       .then(res => this._сheckResponseData(res));
+      // console.log("🚀 ~ file: Api.js ~ line 19 ~ Api ~ getInitialCards ~ jwt", jwt);
   }
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
     })
@@ -36,7 +37,7 @@ class Api {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -51,7 +52,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -66,7 +67,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
     })
@@ -77,7 +78,7 @@ class Api {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
     })
@@ -88,7 +89,7 @@ class Api {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
