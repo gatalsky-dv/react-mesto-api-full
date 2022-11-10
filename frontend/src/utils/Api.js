@@ -101,10 +101,12 @@ class Api {
 
 }
 
+const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3003' : 'https://api.gatalsky.nomoredomains.icu';
+
 const api = new Api({
-  url: 'http://localhost:3003',
+  url: BASE_URL,
   headers: {
-    // authorization: 'e639a24d-299a-4e69-8f0f-4d8273c25116',
+    authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
   }
 });
