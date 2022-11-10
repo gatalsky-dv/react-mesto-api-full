@@ -123,7 +123,7 @@ export default function App() {
 		if (loggedIn) {
 			api.getInitialCards()
 				.then((res) => {
-					setCards(res);
+					setCards(res.reverse());
 				})
 				.catch((err) => {
 					console.log(err);
@@ -147,7 +147,7 @@ export default function App() {
 	function handleCardDelete(cardId) {
 		api.deleteCard(cardId)
 			.then((res) => {
-				setCards(cards.filter(card => card._id !== cardId._id))
+				setCards(cards.filter(card => card._id !== cardId));
 			})
 			.catch((err) => {
 				console.log(err);
