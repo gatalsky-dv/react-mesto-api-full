@@ -20,7 +20,6 @@ class Api {
       },
     })
       .then(res => this._сheckResponseData(res));
-      // console.log("🚀 ~ file: Api.js ~ line 19 ~ Api ~ getInitialCards ~ jwt", jwt);
   }
 
   getUserInfo() {
