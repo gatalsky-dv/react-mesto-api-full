@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3003' : 'https://api.gatalsky.nomoredomains.icu'; //адрес бека
+export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3003' : 'https://api.gatalsky.nomoredomains.icu';
 
 function сheckResponseData(res) {
   if (res.ok) {

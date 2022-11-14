@@ -100,7 +100,7 @@ class Api {
 
 }
 
-const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3003' : 'https://api.gatalsky.nomoredomains.icu'; //адрес бека
+const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3003' : 'https://api.gatalsky.nomoredomains.icu';
 
 const api = new Api({
   url: BASE_URL,
